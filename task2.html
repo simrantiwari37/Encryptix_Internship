@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task2</title>
+    <link rel="stylesheet" href="task2.css">
+</head>
+<body>
+    <div class="container">
+        <input id="logo" type="text" placeholder="SIMANx" ><br><br>
+        
+        <div class="display">
+            <input id="screen" type="text" placeholder="|">
+        </div>
+        <div class="button">
+            <div class="row">
+                <button class="btns" id= "ce" onclick="clearEntry()">CE</button>
+                <button class="btns" onclick="factorial()">x!</button>
+                <button class="btns" onclick="appendValue('(')">(</button>
+                <button class="btns" onclick="appendValue(')')">)</button>
+                <button class="btns" onclick="appendValue('%')">%</button>
+                <button class="btns" id = "ac" onclick="clearAll()">AC</button>
+            </div>
+            <div class="row">
+                <button class="btns" onclick="appendValue('Math.sin(')">sin</button>
+                <button class="btns" onclick="appendValue('Math.PI')">pi</button>
+                <button class="btns" onclick="appendValue('7')">7</button>
+                <button class="btns" onclick="appendValue('8')">8</button>
+                <button class="btns" onclick="appendValue('9')">9</button>
+                <button class="btns" onclick="appendValue('/')">/</button>
+            </div>
+            <div class="row">
+                <button class="btns" onclick="appendValue('Math.cos(')">cos</button>
+                <button class="btns" onclick="appendValue('Math.log10(')">ln</button>
+                <button class="btns" onclick="appendValue('4')">4</button>
+                <button class="btns" onclick="appendValue('5')">5</button>
+                <button class="btns" onclick="appendValue('6')">6</button>
+                <button class="btns" onclick="appendValue('*')">*</button>
+            </div>
+            <div class="row">
+                <button class="btns" onclick="appendValue('Math.tan(')">tan</button>
+                <button class="btns" onclick="appendValue('Math.sqrt(')">r</button>
+                <button class="btns" onclick="appendValue('1')">1</button>
+                <button class="btns" onclick="appendValue('2')">2</button>
+                <button class="btns" onclick="appendValue('3')">3</button>
+                <button class="btns" onclick="appendValue('-')">-</button>
+            </div>
+            <div class="row">
+                <button class="btns" onclick="appendValue('Math.E')">e</button>
+                <button class="btns" onclick="appendValue('^')">x^</button>
+                <button class="btns" onclick="appendValue('0')">0</button>
+                <button class="btns" onclick="appendValue('.')">.</button>
+                <button class="btns double" id="eval" onclick="calculate()">=</button>
+                <button class="btns" onclick="appendValue('+')">+</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function appendValue(value) {
+            document.getElementById('screen').value += value;
+        }
+
+        function clearEntry() {
+            let screen = document.getElementById('screen');
+            screen.value = screen.value.slice(0, -1);
+        }
+
+        function clearAll() {
+            document.getElementById('screen').value = '';
+        }
+
+        function factorial() {
+            let screen = document.getElementById('screen');
+            let number = parseInt(screen.value);
+            if (number === 0 || number === 1) {
+                screen.value = 1;
+                return;
+            }
+            let result = 1;
+            for (let i = 2; i <= number; i++) {
+                result *= i;
+            }
+            screen.value = result;
+        }
+
+        function calculate() {
+            let screen = document.getElementById('screen');
+            try {
+                screen.value = eval(screen.value.replace(/\^/g, '**'));
+            } catch (e) {
+                screen.value = `Syntax Error`;
+                ;
+            }
+        }
+    </script>
+</body>
+</html>
